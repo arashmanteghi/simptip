@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Arash Manteghi">
+    <link rel="icon" href="http://arashm.net/lab/simptip/favicon.ico" sizes="32x32">    
+    <title>Simptip Demo</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/simptip.css" media="screen,projection" />
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial;
+        background: #ddd;
+        height: 100%;
+        font-size: 18px;
+        color: #444;
+      }
+      h1 {font-size: 4em;}
+      h3{font-size: 1.2em;}
+      h1,h3{margin: 10px;}
+      table{
+        width: 60%;
+        margin: 10px 20%;
+      }
+      span {margin-top: 10px;}
+    </style>
+
+  </head>
+  <body>
+    <h1>Simptip</h1>
+    <h3>A simple CSS tooltip that has been made by Sass</h3>
+    <table>
+      <tr>
+        <td><span class="simptip-position-top" data-tooltip="I'm in top">position top</span></td>
+        <td><span class="simptip-position-top" data-tooltip="I'm in bottom">position bottom</span></td>
+      </tr>
+      <tr>
+        <td><span class="simptip-position-right" data-tooltip="I'm in right">position right</span></td>
+        <td><span class="simptip-position-left" data-tooltip="I'm in left">position left</span></td>
+      </tr>
+      <tr>
+        <td><span class="simptip-position-bottom simptip-success" data-tooltip="I'm a success tooltip">success</span></td>
+        <td><span class="simptip-position-bottom simptip-info" data-tooltip="I'm an info tooltip">info</span></td>
+      </tr>
+      <tr>
+        <td><span class="simptip-position-bottom simptip-warning" data-tooltip="I'm a warning tooltip">warning</span></td>
+        <td><span class="simptip-position-bottom simptip-danger" data-tooltip="I'm an danger tooltip">danger</span></td>
+      </tr>
+      <tr>
+        <td><span class="simptip-position-bottom half-arrow simptip-warning" data-tooltip="I'm a tooltip with half arrow">half arrow</span></td>
+        <td><span class="simptip-position-bottom simptip-smooth" data-tooltip="I'm a tooltip with soft edge">soft edge</span></td>
+      </tr>
+      <tr>
+        <td><span class="simptip-position-bottom simptip-fade" data-tooltip="I'm a tooltip with fade effect">fade effect</span></td>
+        <td><span class="simptip-position-bottom simptip-movable" data-tooltip="I'm a tooltip with movable effect">movable effect</span></td>
+      </tr>
+      <tr>
+        <td><span class="simptip-position-bottom simptip-movable half-arrow simptip-multiline simptip-info" data-tooltip="I'm a multiline tooltip with movable effect and half arrow for information">
+          movable effect
+        </span></td>
+      </tr>
+    </table>
+    
+  </body>
+</html>
