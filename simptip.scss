@@ -1,0 +1,267 @@
+//----------------------------------------------------
+//                      SimpTip                      \\
+//  A simple CSS Tooltip that has been made by Sass  \\
+//-----------------------------------------------------
+// source: https://github.com/arashmanteghi/simptip/
+// ducoment: http://arashm.net/lab/simptip/
+// by @ArashManteghi - http://arashm.net
+//-----------------------------------------------------
+
+/****************************** Variables ****************************/
+//tooltip's default height
+$tooltipHeight: 22px;
+
+//tooltip's default arrow size
+$arrowSize: 6px;
+
+//tooltip's default box color
+$tooltipColor: #323232;
+
+//tooltip's default text color
+$tooltipTextColor: #ecf0f1;
+
+
+/******************************** Mixins *****************************/
+//generate custom colors for tooltip's box and the texts. we use it without argumant for default color
+@mixin applyColor($color:$tooltipColor, $textColor:$tooltipTextColor) {
+	@each $position in top, bottom, left, right {
+		&.simptip-position-#{$position}{
+			&:before{border-#{$position}-color: $color;}
+			&:after{background-color: $color; color: $textColor;}
+		}
+	}
+	@each $position in top, bottom {
+		&.simptip-position-#{$position} {
+			&.half-arrow {
+				&:before {border-right: $arrowSize+1px solid $color;}
+			}
+		}
+	}
+}
+
+@mixin border-radius($radius:4px) {
+  -moz-border-radius: 		$radius;
+  -webkit-border-radius: 	$radius;
+  -ms-border-radius: 			$radius;
+  -o-border-radius: 			$radius;
+  border-radius: 					$radius;
+}
+
+@mixin fade ($duration: 0.2s) {
+	-webkit-transition: opacity $duration linear, visibility $duration linear;
+	-moz-transition: 		opacity $duration linear, visibility $duration linear;
+	-ms-transition: 		opacity $duration linear, visibility $duration linear;
+	-o-transition: 			opacity $duration linear, visibility $duration linear;
+	transition: 				opacity $duration linear, visibility $duration linear;	
+}
+
+@mixin transition($transition) {
+	-webkit-transition: $transition;
+	-moz-transition: 		$transition;
+	-o-transition:   		$transition;
+	-ms-transition: 		$transition;
+	transition: 				$transition;
+}
+
+@mixin transform($string){
+	-webkit-transform: $string;
+	-moz-transform: 	 $string;
+	-ms-transform: 		 $string;
+	-o-transform: 		 $string;
+	transform: 				 $string
+}
+
+//generate multiline tooltips
+@mixin multiline ($width: 150px, $align: left) {
+	height: auto;
+	width: $width;
+	padding: $tooltipHeight/2;
+	line-height: $tooltipHeight - 3px;
+	white-space: normal;
+	text-align: $align;
+}
+
+
+/********************************* Core ******************************/
+[data-tooltip] {	
+	position: relative;
+	display: inline-block;
+	&:before, &:after {
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+		z-index: 999999;
+		// Force Hardware Acceleration in WebKit with translate3d - Refrence: http://davidwalsh.name/translate3d
+		-webkit-transform: translate3d(0, 0, 0);
+		-moz-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+	// tooltip arrow	 
+	&:before {
+		content: '';
+		position: absolute;
+		border-width: $arrowSize;
+    border-style: solid;
+    border-color: transparent;
+	}		
+	// tooltip box
+	&:after {
+		height: $tooltipHeight;
+		padding: $tooltipHeight/2 $tooltipHeight/2 0 $tooltipHeight/2;
+		font-size: 13px;
+		line-height: $tooltipHeight/2	;	
+		content: attr(data-tooltip);
+		white-space: nowrap;					
+	}
+	@include applyColor();
+	&:hover, &:focus{background-color: transparent;}
+	&:hover:before, &:hover:after,
+	&:focus:before, &:focus:after {
+		visibility: visible;
+		opacity: 1;		
+	}	
+}
+
+
+/******************************* Position ****************************/
+.simptip-position-right, .simptip-position-left, .simptip-position-top, .simptip-position-bottom {
+	&.simptip-movable {	&:before, &:after {@include transition(all 0.1s linear);} }
+}
+
+.simptip-position-right, .simptip-position-left {
+	&:before, &:after {bottom: 50%;}
+	&:before{margin-bottom: $arrowSize * -1 + 1; /*-5px*/}
+	&:after {margin-bottom: $tooltipHeight/-1.5;}
+	&.half-arrow{
+		&:before {
+			bottom: 16px;
+			border-style: none;
+			border-top: $arrowSize+1px solid transparent;	
+		}
+	}	
+	&.simptip-multiline{		
+		&:before, &:after {bottom: -50%; }
+		&:before{margin-bottom: 15px;}
+	}
+}
+
+.simptip-position-right{
+	&:before,&:after {left: 100%;}
+	&:before{margin-left: -2px;}
+	&:after{margin-left: 10px;}
+	&.simptip-movable {
+		&:before {margin-left: -10px;}
+		&:after {margin-left: 2px;}
+		&:hover{
+			&:before, &:after {@include transform(translateX(10px));}
+		}
+		&.half-arrow:before{margin-left: -5px;}
+	}
+	&.half-arrow{
+		&:before {
+			margin-left: 3px;
+			border-right: $arrowSize+1px solid $tooltipColor;	
+		}
+	}
+}
+
+.simptip-position-left {
+	&:before,&:after {right: 100%;}
+	&:before{margin-right: -2px;}
+	&:after{margin-right: 10px;}
+	&.simptip-movable {
+		&:before {margin-right: -10px;}
+		&:after {margin-right: 2px;}
+		&:hover{
+			&:before, &:after {@include transform(translateX(-10px));}
+		}
+		&.half-arrow:before{margin-right: -5px;}
+	}
+	&.half-arrow{
+		&:before {
+			margin-right: 3px;
+			border-left: $arrowSize+1px solid $tooltipColor;	
+		}
+	}
+}
+
+.simptip-position-bottom, .simptip-position-top {
+	&:before, &:after {left: 50%;}
+	&:after {margin-left: -18px;}
+	&.half-arrow{
+		&:before {
+			border-style: none;			
+			border-right: $arrowSize+1px solid $tooltipColor;
+		}
+	}
+}
+
+.simptip-position-bottom {
+	&:before, &:after {top: 100%;}
+	&:before {margin-top: $arrowSize * -1 + 1; /*-5px*/}
+	&:after {margin-top: 7px;}
+	&.simptip-movable {
+		&:before {margin-top: -15px;}
+		&:after {margin-top: -3px;}
+		&:hover{
+			&:before, &:after {@include transform(translateY(10px));}
+		}
+		&.half-arrow:before{margin-top: -10px}
+	}
+	&.half-arrow{
+		&:before {
+			margin-top: 0;
+			border-top: $arrowSize+1px solid transparent;
+		}
+	}
+}
+
+.simptip-position-top {
+	&:before, &:after {bottom: 100%;}
+	&:before {margin-bottom: $arrowSize * -1 + 1; /*-5px*/}
+	&:after {margin-bottom: 7px;}
+	&.simptip-movable {
+		&:before {margin-bottom: -15px;}
+		&:after {margin-bottom: -3px;}
+		&:hover{
+			&:before, &:after {@include transform(translateY(-10px));}
+		}
+		&.half-arrow:before{margin-bottom: -10px}
+	}
+	&.half-arrow{
+		&:before {
+			margin-bottom: 0;
+			border-bottom: $arrowSize+1px solid transparent;	
+		}
+	}
+}
+
+
+/******************************* Features ****************************/
+//soft edge
+.simptip-smooth {
+	&:after{ @include border-radius();}
+}
+
+.simptip-fade {
+	&:before, &:after{
+		@include fade();
+	}
+}
+
+//multiline tooltip
+.simptip-multiline {
+	&:after {	@include multiline(); }
+}
+
+
+/**************************** Diverse Colors *************************/
+.simptip-success {@include applyColor(#62c462);}
+
+.simptip-info {@include applyColor(#5bc0de);}
+
+.simptip-danger {@include applyColor(#e74c3c);}
+
+.simptip-warning {
+	@include applyColor(#e67e22);
+}
