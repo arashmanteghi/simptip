@@ -3,7 +3,6 @@
 // source: https://github.com/arashmanteghi/simptip/
 // ducoment: http://arashm.net/lab/simptip/
 // by @ArashManteghi - http://arashm.net */
-
 [data-tooltip] {
   position: relative;
   display: inline-block;
@@ -14,9 +13,6 @@
   visibility: hidden;
   opacity: 0;
   z-index: 999999;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
 }
 
 [data-tooltip]:before {
