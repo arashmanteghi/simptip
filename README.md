@@ -1,12 +1,12 @@
 # Simptip [v1.0.0]
-#####A simple CSS tooltip that has been made by Sass
+####A simple CSS tooltip made with Sass
 
 ###[Visit Site, Documentation and some examples]()
 
 
 ###Installation
 
-We explain this with an example:
+I'll explain with an example:
 ```html
 <link rel="stylesheet" type="text/css" href="simptip-mini.css" />
 ```
@@ -17,11 +17,11 @@ or:
 
 ###Usage
 
-Then you can use like this:
+Then you can do something like this:
 ```html
 <span class="simptip-position-top" data-tooltip="Tooltip's content"> Text </span>
 ```
-What you see in the data-tooltip attribute is the text content of tooltips, and the value of class attribute is about tooltop's position.
+What you see in the data-tooltip attribute is the text content of the tooltips, and the value of class attribute is tooltop's position.
 
 You can use `.simptip-position-right` , `.simptip-position-bottom` and `.simptip-position-left` class for other positions that you would like.
 
