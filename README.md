@@ -1,7 +1,7 @@
 # Simptip [v1.0.0]
 ####A simple CSS tooltip made with Sass
 
-###[Visit Site, Documentation and some examples]()
+###[Visit Site, Documentation and some examples](http://arashm.net/lab/simptip/)
 
 
 ###Installation
