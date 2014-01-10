@@ -46,31 +46,24 @@
     border-right: 7px solid #323232; }
   [data-tooltip]:hover, [data-tooltip]:focus {
     background-color: transparent; }
-  [data-tooltip]:hover:before, [data-tooltip]:hover:after, [data-tooltip]:focus:before, [data-tooltip]:focus:after {
-    visibility: visible;
-    opacity: 1; }
+    [data-tooltip]:hover:before, [data-tooltip]:hover:after, [data-tooltip]:focus:before, [data-tooltip]:focus:after {
+      opacity: 1;
+      visibility: visible; }
 
 /******************************* Position ****************************/
-.simptip-position-right.simptip-movable:before, .simptip-position-right.simptip-movable:after, .simptip-position-left.simptip-movable:before, .simptip-position-left.simptip-movable:after, .simptip-position-top.simptip-movable:before, .simptip-position-top.simptip-movable:after, .simptip-position-bottom.simptip-movable:before, .simptip-position-bottom.simptip-movable:after {
-  -webkit-transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-  -ms-transition: all 0.1s linear;
-  transition: all 0.1s linear; }
-
-.simptip-position-right:before, .simptip-position-right:after, .simptip-position-left:before, .simptip-position-left:after {
+.simptip-position-right:before, .simptip-position-left:before, .simptip-position-right:after, .simptip-position-left:after {
   bottom: 50%; }
 .simptip-position-right:before, .simptip-position-left:before {
   margin-bottom: -5px; }
 .simptip-position-right:after, .simptip-position-left:after {
   margin-bottom: -14.66667px; }
-.simptip-position-right.half-arrow:before, .simptip-position-left.half-arrow:before {
+.half-arrow.simptip-position-right:before, .half-arrow.simptip-position-left:before {
   bottom: 16px;
   border-style: none;
   border-top: 7px solid transparent; }
-.simptip-position-right.simptip-multiline:before, .simptip-position-right.simptip-multiline:after, .simptip-position-left.simptip-multiline:before, .simptip-position-left.simptip-multiline:after {
+.simptip-multiline.simptip-position-right:before, .simptip-multiline.simptip-position-left:before, .simptip-multiline.simptip-position-right:after, .simptip-multiline.simptip-position-left:after {
   bottom: -50%; }
-.simptip-position-right.simptip-multiline:before, .simptip-position-left.simptip-multiline:before {
+.simptip-multiline.simptip-position-right:before, .simptip-multiline.simptip-position-left:before {
   margin-bottom: 15px; }
 
 .simptip-position-right:before, .simptip-position-right:after {
@@ -117,11 +110,11 @@
   margin-right: 3px;
   border-left: 7px solid #323232; }
 
-.simptip-position-bottom:before, .simptip-position-bottom:after, .simptip-position-top:before, .simptip-position-top:after {
+.simptip-position-bottom:before, .simptip-position-top:before, .simptip-position-bottom:after, .simptip-position-top:after {
   left: 50%; }
 .simptip-position-bottom:after, .simptip-position-top:after {
   margin-left: -18px; }
-.simptip-position-bottom.half-arrow:before, .simptip-position-top.half-arrow:before {
+.half-arrow.simptip-position-bottom:before, .half-arrow.simptip-position-top:before {
   border-style: none;
   border-right: 7px solid #323232; }
 
@@ -170,6 +163,13 @@
   border-bottom: 7px solid transparent; }
 
 /******************************* Features ****************************/
+.simptip-movable:before, .simptip-movable:after {
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  transition: all 0.1s linear; }
+
 .simptip-smooth:after {
   -webkit-border-radius: 4px;
   border-radius: 4px; }

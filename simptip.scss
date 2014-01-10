@@ -20,23 +20,29 @@ $tooltipColor: #323232;
 //tooltip's default text color
 $tooltipTextColor: #ecf0f1;
 
+//diverse color variables
+$c-success: #62c462;
+$c-info:    #5bc0de;
+$c-danger:  #e74c3c;
+$c-warning: #e67e22;
+
 
 // ******************************** Mixins *****************************/
 //generate custom colors for tooltip's box and the texts. we use it without argumant for default color
 @mixin applyColor($color:$tooltipColor, $textColor:$tooltipTextColor) {
-	@each $position in top, bottom, left, right {
-		&.simptip-position-#{$position}{
-			&:before{border-#{$position}-color: $color;}
-			&:after{background-color: $color; color: $textColor;}
-		}
-	}
-	@each $position in top, bottom {
-		&.simptip-position-#{$position} {
-			&.half-arrow {
-				&:before {border-right: $arrowSize+1px solid $color;}
-			}
-		}
-	}
+  @each $position in top, bottom, left, right {
+    &.simptip-position-#{$position}{
+      &:before{border-#{$position}-color: $color;}
+      &:after{background-color: $color; color: $textColor;}
+    }
+  }
+  @each $position in top, bottom {
+    &.simptip-position-#{$position} {
+      &.half-arrow {
+        &:before {border-right: $arrowSize+1px solid $color;}
+      }
+    }
+  }
 }
 
 @mixin border-radius($radius: 4px) {
@@ -66,190 +72,301 @@ $tooltipTextColor: #ecf0f1;
 
 //generate multiline tooltips
 @mixin multiline ($width: 150px, $align: left) {
-	height: auto;
-	width: $width;
-	padding: $tooltipHeight/2;
-	line-height: $tooltipHeight - 3px;
-	white-space: normal;
-	text-align: $align;
+  height: auto;
+  width: $width;
+  padding: $tooltipHeight/2;
+  line-height: $tooltipHeight - 3px;
+  white-space: normal;
+  text-align: $align;
 }
+
+// ******************* Customize CSS Output *********************/
+
+// No need to delete or comment out code.
+// Simply set any features you don't want to compile to false to
+// reduce the CSS output to only what you need.
+
+// Positioning
+$left-positioning:        true!default;
+$right-positioning:       true!default;
+$top-positioning:         true!default;
+$bottom-positioning:      true!default;
+
+// Half Arrows
+$half-arrows:             true!default;
+
+// Extra Features
+$movable:                 true!default;
+$soft-edge:               true!default;
+$fade-effect:             true!default;
+$multiline:               true!default;
+
+
+// Diverse Colors
+$coloring:                true!default;
 
 
 /********************************* Core ******************************/
-[data-tooltip] {	
-	position: relative;
-	display: inline-block;
-	&:before, &:after {
-		position: absolute;
-		visibility: hidden;
-		opacity: 0;
-		z-index: 999999;
-		// Force Hardware Acceleration in WebKit with translate3d - Refrence: http://davidwalsh.name/translate3d
-		-webkit-transform: translate3d(0, 0, 0);
-		   -moz-transform: translate3d(0, 0, 0);
-		        transform: translate3d(0, 0, 0);
-	}
-	// tooltip arrow	 
-	&:before {
-		content: '';
+[data-tooltip] {  
+  position: relative;
+  display: inline-block;
+  &:before, &:after {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 999999;
+    // Force Hardware Acceleration in WebKit with translate3d - Refrence: http://davidwalsh.name/translate3d
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+  // tooltip arrow   
+  &:before {
+    content: '';
     border: $arrowSize solid transparent;
-	}
-	// tooltip box
-	&:after {
-		height: $tooltipHeight;
-		padding: $tooltipHeight/2 $tooltipHeight/2 0 $tooltipHeight/2;
-		font-size: 13px;
-		line-height: $tooltipHeight/2;
-		content: attr(data-tooltip);
-		white-space: nowrap;
-	}
-	@include applyColor();
-	&:hover, &:focus{background-color: transparent;}
-	&:hover:before, &:hover:after,
-	&:focus:before, &:focus:after {
-		visibility: visible;
-		opacity: 1;
-	}
+  }
+  // tooltip box
+  &:after {
+    height: $tooltipHeight;
+    padding: $tooltipHeight/2 $tooltipHeight/2 0 $tooltipHeight/2;
+    font-size: 13px;
+    line-height: $tooltipHeight/2;
+    content: attr(data-tooltip);
+    white-space: nowrap;
+  }
+  @include applyColor();
+  &:hover, &:focus{
+  	background-color: transparent;
+
+  	&:before, &:after {
+  		opacity: 1;
+  		visibility: visible;
+  	}
+  }
 }
 
 
 /******************************* Position ****************************/
-.simptip-position-right, .simptip-position-left, .simptip-position-top, .simptip-position-bottom {
-	&.simptip-movable {	&:before, &:after {@include transition(all 0.1s linear);} }
-}
 
-.simptip-position-right, .simptip-position-left {
-	&:before, &:after {bottom: 50%;}
-	&:before{margin-bottom: $arrowSize * -1 + 1; } // -5px
-	&:after {margin-bottom: $tooltipHeight/-1.5;}
-	&.half-arrow{
-		&:before {
-			bottom: 16px;
-			border-style: none;
-			border-top: $arrowSize+1px solid transparent;	
-		}
-	}	
-	&.simptip-multiline {
-		&:before, &:after {bottom: -50%; }
-		&:before{margin-bottom: 15px;}
-	}
-}
+//___________________ Left & Right Silent Classes ___________________/
+%shared--left-and-right {
+  &:before, &:after {bottom: 50%;}
+  &:before{margin-bottom: $arrowSize * -1 + 1; } // -5px
+  &:after {margin-bottom: $tooltipHeight/-1.5;}
 
-.simptip-position-right{
-	&:before,&:after {left: 100%;}
-	&:before{margin-left: -2px;}
-	&:after{margin-left: 10px;}
-	&.simptip-movable {
-		&:before {margin-left: -10px;}
-		&:after {margin-left: 2px;}
-		&:hover{
-			&:before, &:after {@include transform(translateX(10px));}
-		}
-		&.half-arrow:before{margin-left: -5px;}
+  @if $half-arrows == true {
+	  &.half-arrow{
+	    &:before {
+	      bottom: 16px;
+	      border-style: none;
+	      border-top: $arrowSize+1px solid transparent; 
+	    }
+	  }
 	}
-	&.half-arrow{
-		&:before {
-			margin-left: 3px;
-			border-right: $arrowSize+1px solid $tooltipColor;
-		}
-	}
+  &.simptip-multiline {
+    &:before, &:after {bottom: -50%; }
+    &:before{margin-bottom: 15px;}
+  }
 }
+//_____________________ End: Silent Classes _______________________/
 
-.simptip-position-left {
-	&:before,&:after {right: 100%;}
-	&:before{margin-right: -2px;}
-	&:after{margin-right: 10px;}
-	&.simptip-movable {
-		&:before {margin-right: -10px;}
-		&:after {margin-right: 2px;}
-		&:hover{
-			&:before, &:after {@include transform(translateX(-10px));}
-		}
-		&.half-arrow:before{margin-right: -5px;}
-	}
-	&.half-arrow{
-		&:before {
-			margin-right: 3px;
-			border-left: $arrowSize+1px solid $tooltipColor;	
+// Right Position Styling
+@if $right-positioning == true {
+	.simptip-position-right {
+	  @extend %shared--left-and-right;
+	  &:before,&:after {left: 100%;}
+	  &:before{margin-left: -2px;}
+	  &:after{margin-left: 10px;}
+
+    @if $movable == true {
+      &.simptip-movable {
+        &:before {margin-left: -10px;}
+        &:after {margin-left: 2px;}
+        &:hover{
+          &:before, &:after {@include transform(translateX(10px));}
+        }
+
+				@if $half-arrows == true {
+	        &.half-arrow:before{margin-left: -5px;}
+	      }
+      }
+    }
+
+		@if $half-arrows == true {
+		  &.half-arrow{
+		    &:before {
+		      margin-left: 3px;
+		      border-right: $arrowSize+1px solid $tooltipColor;
+		    }
+		  }
 		}
 	}
 }
 
-.simptip-position-bottom, .simptip-position-top {
-	&:before, &:after {left: 50%;}
-	&:after {margin-left: -18px;}
-	&.half-arrow{
-		&:before {
-			border-style: none;
-			border-right: $arrowSize+1px solid $tooltipColor;
+// Left Position Styling
+@if $left-positioning == true {
+	.simptip-position-left {
+	  @extend %shared--left-and-right;
+	  &:before,&:after {right: 100%;}
+	  &:before{margin-right: -2px;}
+	  &:after{margin-right: 10px;}
+		
+		@if $movable == true {
+		  &.simptip-movable {
+		    &:before {margin-right: -10px;}
+		    &:after {margin-right: 2px;}
+		    &:hover{
+		      &:before, &:after {@include transform(translateX(-10px));}
+		    }
+				@if $half-arrows == true {
+			    &.half-arrow:before{margin-right: -5px;}
+			  }
+		  }
+		}
+
+		@if $half-arrows == true {
+		  &.half-arrow{
+		    &:before {
+		      margin-right: 3px;
+		      border-left: $arrowSize+1px solid $tooltipColor;  
+		    }
+		  }
 		}
 	}
 }
 
-.simptip-position-bottom {
-	&:before, &:after {top: 100%;}
-	&:before {margin-top: $arrowSize * -1 + 1; } // -5px
-	&:after {margin-top: 7px;}
-	&.simptip-movable {
-		&:before {margin-top: -15px;}
-		&:after {margin-top: -3px;}
-		&:hover{
-			&:before, &:after {@include transform(translateY(10px));}
-		}
-		&.half-arrow:before{margin-top: -10px}
+//_________________ Top & Bottom Silent Classes _________________/
+%shared--top-and-bottom {
+  &:before, &:after {
+    left: 50%;
+  }
+
+  &:after {
+    margin-left: -18px;
+  }
+
+	@if $half-arrows == true {
+	  &.half-arrow{
+	    &:before {
+	      border-style: none;
+	      border-right: $arrowSize+1px solid $tooltipColor;
+	    }
+	  }
 	}
-	&.half-arrow{
-		&:before {
-			margin-top: 0;
-			border-top: $arrowSize+1px solid transparent;
+}
+//_____________________ End: Silent Classes _______________________/
+
+// Bottom Position Styling
+@if $bottom-positioning == true {
+	.simptip-position-bottom {
+	  @extend %shared--top-and-bottom;
+	  &:before, &:after {top: 100%;}
+	  &:before {margin-top: $arrowSize * -1 + 1; } // -5px
+	  &:after {margin-top: 7px;}
+
+		@if $movable == true {
+		  &.simptip-movable {
+		    &:before {margin-top: -15px;}
+		    &:after {margin-top: -3px;}
+		    &:hover{
+		      &:before, &:after {@include transform(translateY(10px));}
+		    }
+
+		    @if $half-arrows == true {
+			    &.half-arrow {
+			      &:before { margin-top: -10px; }
+			    }
+			  }
+		  }
+		}
+
+		@if $half-arrows == true {
+		  &.half-arrow{
+		    &:before {
+		      margin-top: 0;
+		      border-top: $arrowSize+1px solid transparent;
+		    }
+		  }
 		}
 	}
 }
 
-.simptip-position-top {
-	&:before, &:after {bottom: 100%;}
-	&:before {margin-bottom: $arrowSize * -1 + 1; } // -5px
-	&:after {margin-bottom: 7px;}
-	&.simptip-movable {
-		&:before {margin-bottom: -15px;}
-		&:after {margin-bottom: -3px;}
-		&:hover{
-			&:before, &:after {@include transform(translateY(-10px));}
+// Top Position Styling
+@if $top-positioning == true {
+	.simptip-position-top {
+	  @extend %shared--top-and-bottom;
+	  &:before, &:after {bottom: 100%;}
+	  &:before {margin-bottom: $arrowSize * -1 + 1; } // -5px
+	  &:after {margin-bottom: 7px;}
+
+		@if $movable == true {
+		  &.simptip-movable {
+		    &:before {margin-bottom: -15px;}
+		    &:after {margin-bottom: -3px;}
+		    &:hover{
+		      &:before, &:after {@include transform(translateY(-10px));}
+		    }
+
+		    @if $half-arrows == true {
+			    &.half-arrow {
+			      &:before { margin-bottom: -10px; }
+			    }
+			  }
+		  }
 		}
-		&.half-arrow:before{margin-bottom: -10px}
-	}
-	&.half-arrow{
-		&:before {
-			margin-bottom: 0;
-			border-bottom: $arrowSize+1px solid transparent;
+
+		@if $half-arrows == true {
+		  &.half-arrow{
+		    &:before {
+		      margin-bottom: 0;
+		      border-bottom: $arrowSize+1px solid transparent;
+		    }
+		  }
 		}
 	}
 }
 
 
 /******************************* Features ****************************/
-//soft edge
-.simptip-smooth {
-	&:after{ @include border-radius();}
+// animate movement on hover
+@if $movable == true {
+	.simptip-movable {
+	  &:before, &:after {
+	    @include transition(all 0.1s linear);
+	  }
+	}
 }
 
-.simptip-fade {
-	&:before, &:after{
-		@include fade();
+//soft edge
+@if $soft-edge == true {
+	.simptip-smooth {
+	  &:after{ @include border-radius();}
+	}
+}
+
+//fade effect
+@if $fade-effect == true {
+	.simptip-fade {
+	  &:before, &:after{
+	    @include fade();
+	  }
 	}
 }
 
 //multiline tooltip
-.simptip-multiline {
-	&:after {	@include multiline(); }
+@if $multiline == true {
+	.simptip-multiline {
+	  &:after { @include multiline(); }
+	}
 }
 
-
 /**************************** Diverse Colors *************************/
-.simptip-success {@include applyColor(#62c462);}
+@if $coloring == true {
+	.simptip-success {@include applyColor($c-success);}
 
-.simptip-info {@include applyColor(#5bc0de);}
+	.simptip-info {@include applyColor($c-info);}
 
-.simptip-danger {@include applyColor(#e74c3c);}
+	.simptip-danger {@include applyColor($c-danger);}
 
-.simptip-warning {@include applyColor(#e67e22);}
+	.simptip-warning {@include applyColor($c-warning);}
+}
