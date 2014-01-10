@@ -7,7 +7,7 @@
 // by @ArashManteghi - http://arashm.net
 //-----------------------------------------------------
 
-/****************************** Variables ****************************/
+// ****************************** Variables ****************************/
 //tooltip's default height
 $tooltipHeight: 22px;
 
@@ -21,7 +21,7 @@ $tooltipColor: #323232;
 $tooltipTextColor: #ecf0f1;
 
 
-/******************************** Mixins *****************************/
+// ******************************** Mixins *****************************/
 //generate custom colors for tooltip's box and the texts. we use it without argumant for default color
 @mixin applyColor($color:$tooltipColor, $textColor:$tooltipTextColor) {
 	@each $position in top, bottom, left, right {
@@ -39,36 +39,29 @@ $tooltipTextColor: #ecf0f1;
 	}
 }
 
-@mixin border-radius($radius:4px) {
-  -moz-border-radius: 		$radius;
-  -webkit-border-radius: 	$radius;
-  -ms-border-radius: 			$radius;
-  -o-border-radius: 			$radius;
-  border-radius: 					$radius;
+@mixin border-radius($radius: 4px) {
+  -webkit-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+       -o-transition: $transition;
+      -ms-transition: $transition;
+          transition: $transition;
 }
 
 @mixin fade ($duration: 0.2s) {
-	-webkit-transition: opacity $duration linear, visibility $duration linear;
-	-moz-transition: 		opacity $duration linear, visibility $duration linear;
-	-ms-transition: 		opacity $duration linear, visibility $duration linear;
-	-o-transition: 			opacity $duration linear, visibility $duration linear;
-	transition: 				opacity $duration linear, visibility $duration linear;	
-}
-
-@mixin transition($transition) {
-	-webkit-transition: $transition;
-	-moz-transition: 		$transition;
-	-o-transition:   		$transition;
-	-ms-transition: 		$transition;
-	transition: 				$transition;
+  @include transition(opacity $duration linear, visibility $duration linear);
 }
 
 @mixin transform($string){
-	-webkit-transform: $string;
-	-moz-transform: 	 $string;
-	-ms-transform: 		 $string;
-	-o-transform: 		 $string;
-	transform: 				 $string
+  -webkit-transform: $string;
+     -moz-transform: $string;
+      -ms-transform: $string;
+       -o-transform: $string;
+          transform: $string;
 }
 
 //generate multiline tooltips
@@ -93,33 +86,30 @@ $tooltipTextColor: #ecf0f1;
 		z-index: 999999;
 		// Force Hardware Acceleration in WebKit with translate3d - Refrence: http://davidwalsh.name/translate3d
 		-webkit-transform: translate3d(0, 0, 0);
-		-moz-transform: translate3d(0, 0, 0);
-		transform: translate3d(0, 0, 0);
+		   -moz-transform: translate3d(0, 0, 0);
+		        transform: translate3d(0, 0, 0);
 	}
 	// tooltip arrow	 
 	&:before {
 		content: '';
-		position: absolute;
-		border-width: $arrowSize;
-    border-style: solid;
-    border-color: transparent;
-	}		
+    border: $arrowSize solid transparent;
+	}
 	// tooltip box
 	&:after {
 		height: $tooltipHeight;
 		padding: $tooltipHeight/2 $tooltipHeight/2 0 $tooltipHeight/2;
 		font-size: 13px;
-		line-height: $tooltipHeight/2	;	
+		line-height: $tooltipHeight/2;
 		content: attr(data-tooltip);
-		white-space: nowrap;					
+		white-space: nowrap;
 	}
 	@include applyColor();
 	&:hover, &:focus{background-color: transparent;}
 	&:hover:before, &:hover:after,
 	&:focus:before, &:focus:after {
 		visibility: visible;
-		opacity: 1;		
-	}	
+		opacity: 1;
+	}
 }
 
 
@@ -130,7 +120,7 @@ $tooltipTextColor: #ecf0f1;
 
 .simptip-position-right, .simptip-position-left {
 	&:before, &:after {bottom: 50%;}
-	&:before{margin-bottom: $arrowSize * -1 + 1; /*-5px*/}
+	&:before{margin-bottom: $arrowSize * -1 + 1; } // -5px
 	&:after {margin-bottom: $tooltipHeight/-1.5;}
 	&.half-arrow{
 		&:before {
@@ -139,7 +129,7 @@ $tooltipTextColor: #ecf0f1;
 			border-top: $arrowSize+1px solid transparent;	
 		}
 	}	
-	&.simptip-multiline{		
+	&.simptip-multiline {
 		&:before, &:after {bottom: -50%; }
 		&:before{margin-bottom: 15px;}
 	}
@@ -160,7 +150,7 @@ $tooltipTextColor: #ecf0f1;
 	&.half-arrow{
 		&:before {
 			margin-left: 3px;
-			border-right: $arrowSize+1px solid $tooltipColor;	
+			border-right: $arrowSize+1px solid $tooltipColor;
 		}
 	}
 }
@@ -190,7 +180,7 @@ $tooltipTextColor: #ecf0f1;
 	&:after {margin-left: -18px;}
 	&.half-arrow{
 		&:before {
-			border-style: none;			
+			border-style: none;
 			border-right: $arrowSize+1px solid $tooltipColor;
 		}
 	}
@@ -198,7 +188,7 @@ $tooltipTextColor: #ecf0f1;
 
 .simptip-position-bottom {
 	&:before, &:after {top: 100%;}
-	&:before {margin-top: $arrowSize * -1 + 1; /*-5px*/}
+	&:before {margin-top: $arrowSize * -1 + 1; } // -5px
 	&:after {margin-top: 7px;}
 	&.simptip-movable {
 		&:before {margin-top: -15px;}
@@ -218,7 +208,7 @@ $tooltipTextColor: #ecf0f1;
 
 .simptip-position-top {
 	&:before, &:after {bottom: 100%;}
-	&:before {margin-bottom: $arrowSize * -1 + 1; /*-5px*/}
+	&:before {margin-bottom: $arrowSize * -1 + 1; } // -5px
 	&:after {margin-bottom: 7px;}
 	&.simptip-movable {
 		&:before {margin-bottom: -15px;}
@@ -231,7 +221,7 @@ $tooltipTextColor: #ecf0f1;
 	&.half-arrow{
 		&:before {
 			margin-bottom: 0;
-			border-bottom: $arrowSize+1px solid transparent;	
+			border-bottom: $arrowSize+1px solid transparent;
 		}
 	}
 }
@@ -262,6 +252,4 @@ $tooltipTextColor: #ecf0f1;
 
 .simptip-danger {@include applyColor(#e74c3c);}
 
-.simptip-warning {
-	@include applyColor(#e67e22);
-}
+.simptip-warning {@include applyColor(#e67e22);}
