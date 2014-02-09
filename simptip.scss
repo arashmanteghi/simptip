@@ -137,7 +137,6 @@ $coloring:                true!default;
   @include applyColor();
   &:hover, &:focus{
   	background-color: transparent;
-
   	&:before, &:after {
   		opacity: 1;
   		visibility: visible;
@@ -163,10 +162,22 @@ $coloring:                true!default;
 	    }
 	  }
 	}
-  &.simptip-multiline {
-    &:before, &:after {bottom: -50%; }
-    &:before{margin-bottom: 15px;}
+
+  @if $multiline == true {
+  	&.simptip-multiline {
+	    &:before, &:after {
+		    @include transform(translateY(50%));
+		    -webkit-filter: blur(0px);
+     		filter: blur(0px);
+	    }
+	    &:before{margin-bottom: 0;}
+
+	    @if $half-arrows == true {
+			  &.half-arrow{ &:before {margin-bottom: -2px;} }
+			}
+  	}
   }
+
 }
 //_____________________ End: Silent Classes _______________________/
 
@@ -239,11 +250,10 @@ $coloring:                true!default;
 %shared--top-and-bottom {
   &:before, &:after {
     left: 50%;
+    -webkit-transform: translateX(-50%);
   }
 
-  &:after {
-    margin-left: -18px;
-  }
+  &:after {width: auto;}
 
 	@if $half-arrows == true {
 	  &.half-arrow{
@@ -269,7 +279,7 @@ $coloring:                true!default;
 		    &:before {margin-top: -15px;}
 		    &:after {margin-top: -3px;}
 		    &:hover{
-		      &:before, &:after {@include transform(translateY(10px));}
+		      &:before, &:after {@include transform(translate(-50%, 10px));}
 		    }
 
 		    @if $half-arrows == true {
@@ -304,7 +314,7 @@ $coloring:                true!default;
 		    &:before {margin-bottom: -15px;}
 		    &:after {margin-bottom: -3px;}
 		    &:hover{
-		      &:before, &:after {@include transform(translateY(-10px));}
+		      &:before, &:after {@include transform(translate(-50%, -10px));}
 		    }
 
 		    @if $half-arrows == true {
