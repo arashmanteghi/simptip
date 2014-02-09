@@ -1,7 +1,13 @@
+/* SimpTip 
+// a simple CSS tooltip that has been made by Sass 
+// source: https://github.com/arashmanteghi/simptip/
+// ducoment: http://arashm.net/lab/simptip/
+// by @ArashManteghi - http://arashm.net */
+
 /********************************* Core ******************************/
 [data-tooltip] {
   position: relative;
-  display: inline-block; }
+  display: inline-block; }  
   [data-tooltip]:before, [data-tooltip]:after {
     position: absolute;
     visibility: hidden;
@@ -9,7 +15,7 @@
     z-index: 999999;
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0); }
+    transform: translate3d(0, 0, 0); }  
   [data-tooltip]:before {
     content: '';
     border: 6px solid transparent; }
@@ -62,9 +68,17 @@
   border-style: none;
   border-top: 7px solid transparent; }
 .simptip-multiline.simptip-position-right:before, .simptip-multiline.simptip-position-left:before, .simptip-multiline.simptip-position-right:after, .simptip-multiline.simptip-position-left:after {
-  bottom: -50%; }
+  -webkit-transform: translateY(50%);
+  -moz-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  -o-transform: translateY(50%);
+  transform: translateY(50%);
+  -webkit-filter: blur(0px);
+  filter: blur(0px); }
 .simptip-multiline.simptip-position-right:before, .simptip-multiline.simptip-position-left:before {
-  margin-bottom: 15px; }
+  margin-bottom: 0; }
+.simptip-multiline.half-arrow.simptip-position-right:before, .simptip-multiline.half-arrow.simptip-position-left:before {
+  margin-bottom: -2px; }
 
 .simptip-position-right:before, .simptip-position-right:after {
   left: 100%; }
@@ -111,9 +125,10 @@
   border-left: 7px solid #323232; }
 
 .simptip-position-bottom:before, .simptip-position-top:before, .simptip-position-bottom:after, .simptip-position-top:after {
-  left: 50%; }
+  left: 50%;
+  -webkit-transform: translateX(-50%); }
 .simptip-position-bottom:after, .simptip-position-top:after {
-  margin-left: -18px; }
+  width: auto; }
 .half-arrow.simptip-position-bottom:before, .half-arrow.simptip-position-top:before {
   border-style: none;
   border-right: 7px solid #323232; }
@@ -129,11 +144,11 @@
 .simptip-position-bottom.simptip-movable:after {
   margin-top: -3px; }
 .simptip-position-bottom.simptip-movable:hover:before, .simptip-position-bottom.simptip-movable:hover:after {
-  -webkit-transform: translateY(10px);
-  -moz-transform: translateY(10px);
-  -ms-transform: translateY(10px);
-  -o-transform: translateY(10px);
-  transform: translateY(10px); }
+  -webkit-transform: translate(-50%, 10px);
+  -moz-transform: translate(-50%, 10px);
+  -ms-transform: translate(-50%, 10px);
+  -o-transform: translate(-50%, 10px);
+  transform: translate(-50%, 10px); }
 .simptip-position-bottom.simptip-movable.half-arrow:before {
   margin-top: -10px; }
 .simptip-position-bottom.half-arrow:before {
@@ -151,11 +166,11 @@
 .simptip-position-top.simptip-movable:after {
   margin-bottom: -3px; }
 .simptip-position-top.simptip-movable:hover:before, .simptip-position-top.simptip-movable:hover:after {
-  -webkit-transform: translateY(-10px);
-  -moz-transform: translateY(-10px);
-  -ms-transform: translateY(-10px);
-  -o-transform: translateY(-10px);
-  transform: translateY(-10px); }
+  -webkit-transform: translate(-50%, -10px);
+  -moz-transform: translate(-50%, -10px);
+  -ms-transform: translate(-50%, -10px);
+  -o-transform: translate(-50%, -10px);
+  transform: translate(-50%, -10px); }
 .simptip-position-top.simptip-movable.half-arrow:before {
   margin-bottom: -10px; }
 .simptip-position-top.half-arrow:before {
