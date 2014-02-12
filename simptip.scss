@@ -1,6 +1,6 @@
 //----------------------------------------------------
-//                      SimpTip                      \\
-//  A simple CSS Tooltip that has been made by Sass  \\
+//                   SimpTip v1.0.2                  \\
+//       A simple CSS tooltip made with Sass         \\
 //-----------------------------------------------------
 // source: https://github.com/arashmanteghi/simptip/
 // ducoment: http://arashm.net/lab/simptip/
@@ -250,7 +250,7 @@ $coloring:                true!default;
 %shared--top-and-bottom {
   &:before, &:after {
     left: 50%;
-    -webkit-transform: translateX(-50%);
+    @include transform(translateX(-50%));
   }
 
   &:after {width: auto;}
@@ -273,6 +273,9 @@ $coloring:                true!default;
 	  &:before, &:after {top: 100%;}
 	  &:before {margin-top: $arrowSize * -1 + 1; } // -5px
 	  &:after {margin-top: 7px;}
+	  &:hover{
+	  	&:before, &:after {@include transform(translate(-50%, 0));}
+	  }
 
 		@if $movable == true {
 		  &.simptip-movable {
@@ -308,6 +311,9 @@ $coloring:                true!default;
 	  &:before, &:after {bottom: 100%;}
 	  &:before {margin-bottom: $arrowSize * -1 + 1; } // -5px
 	  &:after {margin-bottom: 7px;}
+	  &:hover{
+	  	&:before, &:after {@include transform(translate(-50%, 0px));}
+	  }
 
 		@if $movable == true {
 		  &.simptip-movable {
