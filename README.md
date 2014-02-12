@@ -1,4 +1,4 @@
-# Simptip [v1.0.1]
+# Simptip [v1.0.2]
 ####A simple CSS tooltip made with Sass
 
 ###[Visit Site, Documentation and some examples](http://arashm.net/lab/simptip/)
