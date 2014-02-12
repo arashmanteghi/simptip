@@ -36,6 +36,7 @@ You can also use more features of Simptip by adding these classes:
 - `.simptip-warning` : changes color to orange spectrum
 - `.simptip-danger` : changes color to red spectrum
 
+let me know if you use it in your projects.
 
 ###License
 Copyright (c) 2013 Arash Manteghi
