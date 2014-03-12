@@ -28,7 +28,7 @@ You can use `.simptip-position-right` , `.simptip-position-bottom` and `.simptip
 You can also use more features of Simptip by adding these classes:
 - `.half-arrow` : change tooltip's arrow to half arrow
 - `.simptip-smooth` : makes soft edge for tooltip
-- `simptip-fade` : fades effect for show/hide
+- `.simptip-fade` : fades effect for show/hide
 - `.simptip-movable` : shows movable effect
 - `.simptip-multiline` : makes multiline body for tooltip
 - `.simptip-success` : changes color to green spectrum
