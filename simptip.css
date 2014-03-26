@@ -129,6 +129,13 @@
 .simptip-position-right.simptip-movable.half-arrow:before {
   margin-left: -5px;
 }
+.simptip-position-right.simptip-movable.simptip-multiline:hover:before, .simptip-position-right.simptip-movable.simptip-multiline:hover:after {
+  -webkit-transform: translate(10px, 50%);
+  -moz-transform: translate(10px, 50%);
+  -ms-transform: translate(10px, 50%);
+  -o-transform: translate(10px, 50%);
+  transform: translate(10px, 50%);
+}
 .simptip-position-right.half-arrow:before {
   margin-left: 3px;
   border-right: 7px solid #323232;
@@ -158,6 +165,13 @@
 }
 .simptip-position-left.simptip-movable.half-arrow:before {
   margin-right: -5px;
+}
+.simptip-position-left.simptip-movable.simptip-multiline:hover:before, .simptip-position-left.simptip-movable.simptip-multiline:hover:after {
+  -webkit-transform: translate(-10px, 50%);
+  -moz-transform: translate(-10px, 50%);
+  -ms-transform: translate(-10px, 50%);
+  -o-transform: translate(-10px, 50%);
+  transform: translate(-10px, 50%);
 }
 .simptip-position-left.half-arrow:before {
   margin-right: 3px;
