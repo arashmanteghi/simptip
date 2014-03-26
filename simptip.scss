@@ -169,6 +169,7 @@ $coloring:                true!default;
 		    @include transform(translateY(50%));
 		    -webkit-filter: blur(0px);
      		filter: blur(0px);
+     		margin-bottom: 0;
 	    }
 	    &:before{margin-bottom: 0;}
 
