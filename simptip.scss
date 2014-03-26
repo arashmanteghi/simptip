@@ -170,6 +170,7 @@ $coloring:                true!default;
 		    -webkit-filter: blur(0px);
      		filter: blur(0px);
      		margin-bottom: 0;
+
 	    }
 	    &:before{margin-bottom: 0;}
 
@@ -197,10 +198,17 @@ $coloring:                true!default;
         &:hover{
           &:before, &:after {@include transform(translateX(10px));}
         }
-
 				@if $half-arrows == true {
 	        &.half-arrow:before{margin-left: -5px;}
 	      }
+			  @if $multiline == true {		//here here here
+			    &.simptip-multiline {
+			    	&:hover {
+			    		&:before, &:after {@include transform(translate(10px, 50%));}
+
+			    	}
+			    }
+			  }
       }
     }
 
@@ -232,6 +240,14 @@ $coloring:                true!default;
 		    }
 				@if $half-arrows == true {
 			    &.half-arrow:before{margin-right: -5px;}
+			  }
+			  @if $multiline == true {		//here here here
+			    &.simptip-multiline {
+			    	&:hover {
+			    		&:before, &:after {@include transform(translate(-10px, 50%));}
+
+			    	}
+			    }
 			  }
 		  }
 		}
