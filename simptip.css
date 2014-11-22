@@ -1,413 +1,446 @@
-//----------------------------------------------------
-//                   SimpTip v1.0.4                  \\
-//       A simple CSS tooltip made with Sass         \\
-//-----------------------------------------------------
+/* SimpTip v1.0.4
+// A simple CSS tooltip made with Sass 
 // source: https://github.com/arashmanteghi/simptip/
 // ducoment: http://arashm.net/lab/simptip/
-// by @ArashManteghi - http://arashm.net
-//-----------------------------------------------------
-
-// ****************************** Variables ****************************/
-//tooltip's default height
-$tooltipHeight: 22px;
-
-//tooltip's default arrow size
-$arrowSize: 6px;
-
-//tooltip's default box color
-$tooltipColor: #323232;
-
-//tooltip's default text color
-$tooltipTextColor: #ecf0f1;
-
-//diverse color variables
-$c-success: #62c462;
-$c-info:    #5bc0de;
-$c-danger:  #e74c3c;
-$c-warning: #e67e22;
-
-
-// ******************************** Mixins *****************************/
-//generate custom colors for tooltip's box and the texts. we use it without argumant for default color
-@mixin applyColor($color:$tooltipColor, $textColor:$tooltipTextColor) {
-  @each $position in top, bottom, left, right {
-    &.simptip-position-#{$position}{
-      &:before{border-#{$position}-color: $color;}
-      &:after{background-color: $color; color: $textColor;}
-    }
-  }
-  @each $position in top, bottom {
-    &.simptip-position-#{$position} {
-      &.half-arrow {
-        &:before {border-right: $arrowSize+1px solid $color;}
-      }
-    }
-  }
-}
-
-@mixin border-radius($radius: 4px) {
-  -webkit-border-radius: $radius;
-          border-radius: $radius;
-}
-
-@mixin box-sizing($box-model) {
-  -webkit-box-sizing: $box-model;
-     -moz-box-sizing: $box-model;
-          box-sizing: $box-model;
-}
-
-@mixin transition($transition...) {
-  -webkit-transition: $transition;
-     -moz-transition: $transition;
-       -o-transition: $transition;
-      -ms-transition: $transition;
-          transition: $transition;
-}
-
-@mixin fade ($duration: 0.2s) {
-  @include transition(opacity $duration linear, visibility $duration linear);
-}
-
-@mixin transform($string){
-  -webkit-transform: $string;
-     -moz-transform: $string;
-      -ms-transform: $string;
-       -o-transform: $string;
-          transform: $string;
-}
-
-//generate multiline tooltips
-@mixin multiline ($width: 150px, $align: left) {
-  height: auto;
-  width: $width;
-  padding: $tooltipHeight/2;
-  line-height: $tooltipHeight - 3px;
-  white-space: normal;
-  text-align: $align;
-}
-
-// ******************* Customize CSS Output *********************/
-
-// No need to delete or comment out code.
-// Simply set any features you don't want to compile to false to
-// reduce the CSS output to only what you need.
-
-// Positioning
-$left-positioning:        true!default;
-$right-positioning:       true!default;
-$top-positioning:         true!default;
-$bottom-positioning:      true!default;
-
-// Half Arrows
-$half-arrows:             true!default;
-
-// Extra Features
-$movable:                 true!default;
-$soft-edge:               true!default;
-$fade-effect:             true!default;
-$multiline:               true!default;
-
-
-// Diverse Colors
-$coloring:                true!default;
-
-
+// by @ArashManteghi - http://arashm.net */
 /********************************* Core ******************************/
-[data-tooltip] {  
+[data-tooltip] {
   position: relative;
   display: inline-block;
-  @include box-sizing(content-box);
-  &:before, &:after {
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    z-index: 999999;
-    @include box-sizing(content-box);
-    // Force Hardware Acceleration in WebKit with translate3d - Refrence: http://davidwalsh.name/translate3d
-    -webkit-transform: translate3d(0, 0, 0);
-       -moz-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-  }
-  // tooltip arrow   
-  &:before {
-    content: '';
-    border: $arrowSize solid transparent;
-  }
-  // tooltip box
-  &:after {
-    height: $tooltipHeight;
-    padding: $tooltipHeight/2 $tooltipHeight/2 0 $tooltipHeight/2;
-    font-size: 13px;
-    line-height: $tooltipHeight/2;
-    content: attr(data-tooltip);
-    white-space: nowrap;
-  }
-  @include applyColor();
-  &:hover, &:focus{
-  	background-color: transparent;
-  	&:before, &:after {
-  		opacity: 1;
-  		visibility: visible;
-  	}
-  }
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
 }
-
+[data-tooltip]:before, [data-tooltip]:after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 999999;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+[data-tooltip]:before {
+  content: '';
+  border: 6px solid transparent;
+}
+[data-tooltip]:after {
+  height: 22px;
+  padding: 11px 11px 0 11px;
+  font-size: 13px;
+  line-height: 11px;
+  content: attr(data-tooltip);
+  white-space: nowrap;
+}
+[data-tooltip].simptip-position-top:before {
+  border-top-color: #323232;
+}
+[data-tooltip].simptip-position-top:after {
+  background-color: #323232;
+  color: #ecf0f1;
+}
+[data-tooltip].simptip-position-bottom:before {
+  border-bottom-color: #323232;
+}
+[data-tooltip].simptip-position-bottom:after {
+  background-color: #323232;
+  color: #ecf0f1;
+}
+[data-tooltip].simptip-position-left:before {
+  border-left-color: #323232;
+}
+[data-tooltip].simptip-position-left:after {
+  background-color: #323232;
+  color: #ecf0f1;
+}
+[data-tooltip].simptip-position-right:before {
+  border-right-color: #323232;
+}
+[data-tooltip].simptip-position-right:after {
+  background-color: #323232;
+  color: #ecf0f1;
+}
+[data-tooltip].simptip-position-top.half-arrow:before {
+  border-right: 7px solid #323232;
+}
+[data-tooltip].simptip-position-bottom.half-arrow:before {
+  border-right: 7px solid #323232;
+}
+[data-tooltip]:hover, [data-tooltip]:focus {
+  background-color: transparent;
+}
+[data-tooltip]:hover:before, [data-tooltip]:hover:after, [data-tooltip]:focus:before, [data-tooltip]:focus:after {
+  opacity: 1;
+  visibility: visible;
+}
 
 /******************************* Position ****************************/
-
-//___________________ Left & Right Silent Classes ___________________/
-%shared--left-and-right {
-  &:before, &:after {bottom: 50%;}
-  &:before{margin-bottom: $arrowSize * -1 + 1; } // -5px
-  &:after {margin-bottom: $tooltipHeight/-1.5;}
-
-  @if $half-arrows == true {
-	  &.half-arrow{
-	    &:before {
-	      bottom: 16px;
-	      border-style: none;
-	      border-top: $arrowSize+1px solid transparent; 
-	    }
-	  }
-	}
-
-  @if $multiline == true {
-  	&.simptip-multiline {
-	    &:before, &:after {
-		    @include transform(translateY(50%));
-		    -webkit-filter: blur(0px);
-     		filter: blur(0px);
-     		margin-bottom: 0;
-
-	    }
-	    &:before{margin-bottom: 0;}
-
-	    @if $half-arrows == true {
-			  &.half-arrow{ &:before {margin-bottom: -2px;} }
-			}
-  	}
-  }
-
+.simptip-position-right:before, .simptip-position-left:before, .simptip-position-right:after, .simptip-position-left:after {
+  bottom: 50%;
 }
-//_____________________ End: Silent Classes _______________________/
-
-// Right Position Styling
-@if $right-positioning == true {
-	.simptip-position-right {
-	  @extend %shared--left-and-right;
-	  &:before,&:after {left: 100%;}
-	  &:before{margin-left: -2px;}
-	  &:after{margin-left: 10px;}
-
-    @if $movable == true {
-      &.simptip-movable {
-        &:before {margin-left: -10px;}
-        &:after {margin-left: 2px;}
-        &:hover{
-          &:before, &:after {@include transform(translateX(10px));}
-        }
-				@if $half-arrows == true {
-	        &.half-arrow:before{margin-left: -5px;}
-	      }
-			  @if $multiline == true {		//here here here
-			    &.simptip-multiline {
-			    	&:hover {
-			    		&:before, &:after {@include transform(translate(10px, 50%));}
-
-			    	}
-			    }
-			  }
-      }
-    }
-
-		@if $half-arrows == true {
-		  &.half-arrow{
-		    &:before {
-		      margin-left: 3px;
-		      border-right: $arrowSize+1px solid $tooltipColor;
-		    }
-		  }
-		}
-	}
+.simptip-position-right:before, .simptip-position-left:before {
+  margin-bottom: -5px;
+}
+.simptip-position-right:after, .simptip-position-left:after {
+  margin-bottom: -14.66667px;
+}
+.half-arrow.simptip-position-right:before, .half-arrow.simptip-position-left:before {
+  bottom: 16px;
+  border-style: none;
+  border-top: 7px solid transparent;
+}
+.simptip-multiline.simptip-position-right:before, .simptip-multiline.simptip-position-left:before, .simptip-multiline.simptip-position-right:after, .simptip-multiline.simptip-position-left:after {
+  -webkit-transform: translateY(50%);
+  -moz-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  -o-transform: translateY(50%);
+  transform: translateY(50%);
+  -webkit-filter: blur(0px);
+  filter: blur(0px);
+  margin-bottom: 0;
+}
+.simptip-multiline.simptip-position-right:before, .simptip-multiline.simptip-position-left:before {
+  margin-bottom: 0;
+}
+.simptip-multiline.half-arrow.simptip-position-right:before, .simptip-multiline.half-arrow.simptip-position-left:before {
+  margin-bottom: -2px;
 }
 
-// Left Position Styling
-@if $left-positioning == true {
-	.simptip-position-left {
-	  @extend %shared--left-and-right;
-	  &:before,&:after {right: 100%;}
-	  &:before{margin-right: -2px;}
-	  &:after{margin-right: 10px;}
-		
-		@if $movable == true {
-		  &.simptip-movable {
-		    &:before {margin-right: -10px;}
-		    &:after {margin-right: 2px;}
-		    &:hover{
-		      &:before, &:after {@include transform(translateX(-10px));}
-		    }
-				@if $half-arrows == true {
-			    &.half-arrow:before{margin-right: -5px;}
-			  }
-			  @if $multiline == true {		//here here here
-			    &.simptip-multiline {
-			    	&:hover {
-			    		&:before, &:after {@include transform(translate(-10px, 50%));}
-
-			    	}
-			    }
-			  }
-		  }
-		}
-
-		@if $half-arrows == true {
-		  &.half-arrow{
-		    &:before {
-		      margin-right: 3px;
-		      border-left: $arrowSize+1px solid $tooltipColor;  
-		    }
-		  }
-		}
-	}
+.simptip-position-right:before, .simptip-position-right:after {
+  left: 100%;
+}
+.simptip-position-right:before {
+  margin-left: -2px;
+}
+.simptip-position-right:after {
+  margin-left: 10px;
+}
+.simptip-position-right.simptip-movable:before {
+  margin-left: -10px;
+}
+.simptip-position-right.simptip-movable:after {
+  margin-left: 2px;
+}
+.simptip-position-right.simptip-movable:hover:before, .simptip-position-right.simptip-movable:hover:after {
+  -webkit-transform: translateX(10px);
+  -moz-transform: translateX(10px);
+  -ms-transform: translateX(10px);
+  -o-transform: translateX(10px);
+  transform: translateX(10px);
+}
+.simptip-position-right.simptip-movable.half-arrow:before {
+  margin-left: -5px;
+}
+.simptip-position-right.simptip-movable.simptip-multiline:hover:before, .simptip-position-right.simptip-movable.simptip-multiline:hover:after {
+  -webkit-transform: translate(10px, 50%);
+  -moz-transform: translate(10px, 50%);
+  -ms-transform: translate(10px, 50%);
+  -o-transform: translate(10px, 50%);
+  transform: translate(10px, 50%);
+}
+.simptip-position-right.half-arrow:before {
+  margin-left: 3px;
+  border-right: 7px solid #323232;
 }
 
-//_________________ Top & Bottom Silent Classes _________________/
-%shared--top-and-bottom {
-  &:before, &:after {
-    left: 50%;
-    @include transform(translateX(-50%));
-  }
-
-  &:after {width: auto;}
-
-	@if $half-arrows == true {
-	  &.half-arrow{
-	    &:before {
-	      border-style: none;
-	      border-right: $arrowSize+1px solid $tooltipColor;
-	    }
-	  }
-	}
+.simptip-position-left:before, .simptip-position-left:after {
+  right: 100%;
 }
-//_____________________ End: Silent Classes _______________________/
-
-// Bottom Position Styling
-@if $bottom-positioning == true {
-	.simptip-position-bottom {
-	  @extend %shared--top-and-bottom;
-	  &:before, &:after {top: 100%;}
-	  &:before {margin-top: $arrowSize * -1 + 1; } // -5px
-	  &:after {margin-top: 7px;}
-	  &:hover{
-	  	&:before, &:after {@include transform(translate(-50%, 0));}
-	  }
-
-		@if $movable == true {
-		  &.simptip-movable {
-		    &:before {margin-top: -15px;}
-		    &:after {margin-top: -3px;}
-		    &:hover{
-		      &:before, &:after {@include transform(translate(-50%, 10px));}
-		    }
-
-		    @if $half-arrows == true {
-			    &.half-arrow {
-			      &:before { margin-top: -10px; }
-			    }
-			  }
-		  }
-		}
-
-		@if $half-arrows == true {
-		  &.half-arrow{
-		    &:before {
-		      margin-top: 0;
-		      border-top: $arrowSize+1px solid transparent;
-		    }
-		  }
-		}
-	}
+.simptip-position-left:before {
+  margin-right: -2px;
+}
+.simptip-position-left:after {
+  margin-right: 10px;
+}
+.simptip-position-left.simptip-movable:before {
+  margin-right: -10px;
+}
+.simptip-position-left.simptip-movable:after {
+  margin-right: 2px;
+}
+.simptip-position-left.simptip-movable:hover:before, .simptip-position-left.simptip-movable:hover:after {
+  -webkit-transform: translateX(-10px);
+  -moz-transform: translateX(-10px);
+  -ms-transform: translateX(-10px);
+  -o-transform: translateX(-10px);
+  transform: translateX(-10px);
+}
+.simptip-position-left.simptip-movable.half-arrow:before {
+  margin-right: -5px;
+}
+.simptip-position-left.simptip-movable.simptip-multiline:hover:before, .simptip-position-left.simptip-movable.simptip-multiline:hover:after {
+  -webkit-transform: translate(-10px, 50%);
+  -moz-transform: translate(-10px, 50%);
+  -ms-transform: translate(-10px, 50%);
+  -o-transform: translate(-10px, 50%);
+  transform: translate(-10px, 50%);
+}
+.simptip-position-left.half-arrow:before {
+  margin-right: 3px;
+  border-left: 7px solid #323232;
 }
 
-// Top Position Styling
-@if $top-positioning == true {
-	.simptip-position-top {
-	  @extend %shared--top-and-bottom;
-	  &:before, &:after {bottom: 100%;}
-	  &:before {margin-bottom: $arrowSize * -1 + 1; } // -5px
-	  &:after {margin-bottom: 7px;}
-	  &:hover{
-	  	&:before, &:after {@include transform(translate(-50%, 0px));}
-	  }
-
-		@if $movable == true {
-		  &.simptip-movable {
-		    &:before {margin-bottom: -15px;}
-		    &:after {margin-bottom: -3px;}
-		    &:hover{
-		      &:before, &:after {@include transform(translate(-50%, -10px));}
-		    }
-
-		    @if $half-arrows == true {
-			    &.half-arrow {
-			      &:before { margin-bottom: -10px; }
-			    }
-			  }
-		  }
-		}
-
-		@if $half-arrows == true {
-		  &.half-arrow{
-		    &:before {
-		      margin-bottom: 0;
-		      border-bottom: $arrowSize+1px solid transparent;
-		    }
-		  }
-		}
-	}
+.simptip-position-bottom:before, .simptip-position-top:before, .simptip-position-bottom:after, .simptip-position-top:after {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.simptip-position-bottom:after, .simptip-position-top:after {
+  width: auto;
+}
+.half-arrow.simptip-position-bottom:before, .half-arrow.simptip-position-top:before {
+  border-style: none;
+  border-right: 7px solid #323232;
 }
 
+.simptip-position-bottom:before, .simptip-position-bottom:after {
+  top: 100%;
+}
+.simptip-position-bottom:before {
+  margin-top: -5px;
+}
+.simptip-position-bottom:after {
+  margin-top: 7px;
+}
+.simptip-position-bottom:hover:before, .simptip-position-bottom:hover:after {
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+.simptip-position-bottom.simptip-movable:before {
+  margin-top: -15px;
+}
+.simptip-position-bottom.simptip-movable:after {
+  margin-top: -3px;
+}
+.simptip-position-bottom.simptip-movable:hover:before, .simptip-position-bottom.simptip-movable:hover:after {
+  -webkit-transform: translate(-50%, 10px);
+  -moz-transform: translate(-50%, 10px);
+  -ms-transform: translate(-50%, 10px);
+  -o-transform: translate(-50%, 10px);
+  transform: translate(-50%, 10px);
+}
+.simptip-position-bottom.simptip-movable.half-arrow:before {
+  margin-top: -10px;
+}
+.simptip-position-bottom.half-arrow:before {
+  margin-top: 0;
+  border-top: 7px solid transparent;
+}
+
+.simptip-position-top:before, .simptip-position-top:after {
+  bottom: 100%;
+}
+.simptip-position-top:before {
+  margin-bottom: -5px;
+}
+.simptip-position-top:after {
+  margin-bottom: 7px;
+}
+.simptip-position-top:hover:before, .simptip-position-top:hover:after {
+  -webkit-transform: translate(-50%, 0px);
+  -moz-transform: translate(-50%, 0px);
+  -ms-transform: translate(-50%, 0px);
+  -o-transform: translate(-50%, 0px);
+  transform: translate(-50%, 0px);
+}
+.simptip-position-top.simptip-movable:before {
+  margin-bottom: -15px;
+}
+.simptip-position-top.simptip-movable:after {
+  margin-bottom: -3px;
+}
+.simptip-position-top.simptip-movable:hover:before, .simptip-position-top.simptip-movable:hover:after {
+  -webkit-transform: translate(-50%, -10px);
+  -moz-transform: translate(-50%, -10px);
+  -ms-transform: translate(-50%, -10px);
+  -o-transform: translate(-50%, -10px);
+  transform: translate(-50%, -10px);
+}
+.simptip-position-top.simptip-movable.half-arrow:before {
+  margin-bottom: -10px;
+}
+.simptip-position-top.half-arrow:before {
+  margin-bottom: 0;
+  border-bottom: 7px solid transparent;
+}
 
 /******************************* Features ****************************/
-// animate movement on hover
-@if $movable == true {
-	.simptip-movable {
-	  &:before, &:after {
-	    @include transition(all 0.1s linear);
-	  }
-	}
+.simptip-movable:before, .simptip-movable:after {
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  transition: all 0.1s linear;
 }
 
-//soft edge
-@if $soft-edge == true {
-	.simptip-smooth {
-	  &:after{ @include border-radius();}
-	}
+.simptip-smooth:after {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 
-//fade effect
-@if $fade-effect == true {
-	.simptip-fade {
-	  &:before, &:after{
-	    @include fade();
-	  }
-	}
+.simptip-fade:before, .simptip-fade:after {
+  -webkit-transition: opacity 0.2s linear, visibility 0.2s linear;
+  -moz-transition: opacity 0.2s linear, visibility 0.2s linear;
+  -o-transition: opacity 0.2s linear, visibility 0.2s linear;
+  -ms-transition: opacity 0.2s linear, visibility 0.2s linear;
+  transition: opacity 0.2s linear, visibility 0.2s linear;
 }
 
-//multiline tooltip
-@if $multiline == true {
-	.simptip-multiline {
-	  &:after { @include multiline(); }
-	}
+.simptip-multiline:after {
+  height: auto;
+  width: 150px;
+  padding: 11px;
+  line-height: 19px;
+  white-space: normal;
+  text-align: left;
 }
 
 /**************************** Diverse Colors *************************/
-@if $coloring == true {
-	.simptip-success {@include applyColor($c-success);}
+.simptip-success.simptip-position-top:before {
+  border-top-color: #62c462;
+}
+.simptip-success.simptip-position-top:after {
+  background-color: #62c462;
+  color: #ecf0f1;
+}
+.simptip-success.simptip-position-bottom:before {
+  border-bottom-color: #62c462;
+}
+.simptip-success.simptip-position-bottom:after {
+  background-color: #62c462;
+  color: #ecf0f1;
+}
+.simptip-success.simptip-position-left:before {
+  border-left-color: #62c462;
+}
+.simptip-success.simptip-position-left:after {
+  background-color: #62c462;
+  color: #ecf0f1;
+}
+.simptip-success.simptip-position-right:before {
+  border-right-color: #62c462;
+}
+.simptip-success.simptip-position-right:after {
+  background-color: #62c462;
+  color: #ecf0f1;
+}
+.simptip-success.simptip-position-top.half-arrow:before {
+  border-right: 7px solid #62c462;
+}
+.simptip-success.simptip-position-bottom.half-arrow:before {
+  border-right: 7px solid #62c462;
+}
 
-	.simptip-info {@include applyColor($c-info);}
+.simptip-info.simptip-position-top:before {
+  border-top-color: #5bc0de;
+}
+.simptip-info.simptip-position-top:after {
+  background-color: #5bc0de;
+  color: #ecf0f1;
+}
+.simptip-info.simptip-position-bottom:before {
+  border-bottom-color: #5bc0de;
+}
+.simptip-info.simptip-position-bottom:after {
+  background-color: #5bc0de;
+  color: #ecf0f1;
+}
+.simptip-info.simptip-position-left:before {
+  border-left-color: #5bc0de;
+}
+.simptip-info.simptip-position-left:after {
+  background-color: #5bc0de;
+  color: #ecf0f1;
+}
+.simptip-info.simptip-position-right:before {
+  border-right-color: #5bc0de;
+}
+.simptip-info.simptip-position-right:after {
+  background-color: #5bc0de;
+  color: #ecf0f1;
+}
+.simptip-info.simptip-position-top.half-arrow:before {
+  border-right: 7px solid #5bc0de;
+}
+.simptip-info.simptip-position-bottom.half-arrow:before {
+  border-right: 7px solid #5bc0de;
+}
 
-	.simptip-danger {@include applyColor($c-danger);}
+.simptip-danger.simptip-position-top:before {
+  border-top-color: #e74c3c;
+}
+.simptip-danger.simptip-position-top:after {
+  background-color: #e74c3c;
+  color: #ecf0f1;
+}
+.simptip-danger.simptip-position-bottom:before {
+  border-bottom-color: #e74c3c;
+}
+.simptip-danger.simptip-position-bottom:after {
+  background-color: #e74c3c;
+  color: #ecf0f1;
+}
+.simptip-danger.simptip-position-left:before {
+  border-left-color: #e74c3c;
+}
+.simptip-danger.simptip-position-left:after {
+  background-color: #e74c3c;
+  color: #ecf0f1;
+}
+.simptip-danger.simptip-position-right:before {
+  border-right-color: #e74c3c;
+}
+.simptip-danger.simptip-position-right:after {
+  background-color: #e74c3c;
+  color: #ecf0f1;
+}
+.simptip-danger.simptip-position-top.half-arrow:before {
+  border-right: 7px solid #e74c3c;
+}
+.simptip-danger.simptip-position-bottom.half-arrow:before {
+  border-right: 7px solid #e74c3c;
+}
 
-	.simptip-warning {@include applyColor($c-warning);}
+.simptip-warning.simptip-position-top:before {
+  border-top-color: #e67e22;
+}
+.simptip-warning.simptip-position-top:after {
+  background-color: #e67e22;
+  color: #ecf0f1;
+}
+.simptip-warning.simptip-position-bottom:before {
+  border-bottom-color: #e67e22;
+}
+.simptip-warning.simptip-position-bottom:after {
+  background-color: #e67e22;
+  color: #ecf0f1;
+}
+.simptip-warning.simptip-position-left:before {
+  border-left-color: #e67e22;
+}
+.simptip-warning.simptip-position-left:after {
+  background-color: #e67e22;
+  color: #ecf0f1;
+}
+.simptip-warning.simptip-position-right:before {
+  border-right-color: #e67e22;
+}
+.simptip-warning.simptip-position-right:after {
+  background-color: #e67e22;
+  color: #ecf0f1;
+}
+.simptip-warning.simptip-position-top.half-arrow:before {
+  border-right: 7px solid #e67e22;
+}
+.simptip-warning.simptip-position-bottom.half-arrow:before {
+  border-right: 7px solid #e67e22;
 }
