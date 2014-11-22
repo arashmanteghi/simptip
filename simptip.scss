@@ -1,5 +1,5 @@
 //----------------------------------------------------
-//                   SimpTip v1.0.2                  \\
+//                   SimpTip v1.0.4                  \\
 //       A simple CSS tooltip made with Sass         \\
 //-----------------------------------------------------
 // source: https://github.com/arashmanteghi/simptip/
@@ -48,6 +48,12 @@ $c-warning: #e67e22;
 @mixin border-radius($radius: 4px) {
   -webkit-border-radius: $radius;
           border-radius: $radius;
+}
+
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model;
+     -moz-box-sizing: $box-model;
+          box-sizing: $box-model;
 }
 
 @mixin transition($transition...) {
@@ -110,11 +116,13 @@ $coloring:                true!default;
 [data-tooltip] {  
   position: relative;
   display: inline-block;
+  @include box-sizing(content-box);
   &:before, &:after {
     position: absolute;
     visibility: hidden;
     opacity: 0;
     z-index: 999999;
+    @include box-sizing(content-box);
     // Force Hardware Acceleration in WebKit with translate3d - Refrence: http://davidwalsh.name/translate3d
     -webkit-transform: translate3d(0, 0, 0);
        -moz-transform: translate3d(0, 0, 0);
