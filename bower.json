@@ -1,8 +1,8 @@
 {
-  "name": "Simptip",
+  "name": "simptip",
   "version": "1.0.4",
   "main": "simptip.min.css",
   "description": "A simple CSS tooltip made with Sass",
   "license": "MIT",
-  "author": "Arash Manteghi"
+  "author": "@arashmanteghi"
 }

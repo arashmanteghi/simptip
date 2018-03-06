@@ -1,10 +1,30 @@
 # Simptip [v1.0.4]
-####A simple CSS tooltip made with Sass
+#### A simple CSS tooltip made with Sass
 
-###[Visit Site, Documentation and some examples](http://arashm.net/lab/simptip/)
+### [Visit Site, Documentation and some examples](http://arashm.net/lab/simptip/)
 
 
-###Installation
+### Installation
+
+Install with [npm](https://www.npmjs.com/), [Yarn](https://yarnpkg.com/) or [Bower](https://bower.io/):
+
+npm:
+```sh
+npm install simptip --save
+```
+
+
+Yarn (note that `yarn add` automatically saves the package to the `dependencies` in `package.json`):
+```sh
+yarn add simptip
+```
+
+Bower:
+```sh
+bower add simptip --save
+```
+
+### Usage
 
 I'll explain with an example:
 ```html
@@ -14,8 +34,6 @@ or:
 ```html
 <link rel="stylesheet" type="text/css" href="simptip.css" />
 ```
-
-###Usage
 
 Then you can do something like this:
 ```html
@@ -36,9 +54,9 @@ You can also use more features of Simptip by adding these classes:
 - `.simptip-warning` : changes color to orange spectrum
 - `.simptip-danger` : changes color to red spectrum
 
-######[Let me know if you use it in your projects.](https://twitter.com/arashmanteghi)
+###### [Let me know if you use it in your projects.](https://twitter.com/arashmanteghi)
 
-###License
-Copyright (c) 2013 Arash Manteghi
+### License
+Copyright (c) 2013 @arashmanteghi
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).

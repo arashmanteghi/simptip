@@ -1,0 +1,25 @@
+{
+  "name": "simptip",
+  "version": "1.0.4",
+  "description": "A simple CSS tooltip made with Sass",
+  "main": "simptip.min.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arashmanteghi/simptip.git"
+  },
+  "keywords": [
+    "tooltip",
+    "sass",
+    "scss",
+    "css"
+  ],
+  "author": "@arashmanteghi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arashmanteghi/simptip/issues"
+  },
+  "homepage": "https://github.com/arashmanteghi/simptip#readme"
+}
